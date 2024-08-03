@@ -8,9 +8,9 @@ const registerUser = (req, res) => {
 }
 
 const findUser = async (req, res) => {
-    const userCreated = await UserModels.findByPk(req.params.id);
+    const user = await UserModels.findByPk(req.params.id);
     res.json({
-        'users': userCreated
+        'users': user
     });
 }
 
