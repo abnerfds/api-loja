@@ -1,5 +1,6 @@
 const express = require('express')
-const { registerUser, allUsers, findUser } = require('./controllers/UserController')
+const { registerUser, login } = require('./controllers/UserController');
+const { verifyJwtMiddleware } = require('./middleware/verifyJwtMiddleware');
 
 const app = express()
 
@@ -7,9 +8,9 @@ app.use(express.json());
 
 app.post('/register_user', registerUser)
 
-app.get('/all_users', allUsers)
+app.post('/login', login)
 
-app.get('/v1/user/:id', findUser)
+app.post('/kick', verifyJwtMiddleware, (req, res) => res.json(req.user.id))
 
 const port = 3000
 app.listen(port, () => {
